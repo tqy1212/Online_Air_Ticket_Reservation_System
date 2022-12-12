@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Airline Staff Registeration</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif; 
+}
+
+/* Style the header */
+header {
+  background-color: #123F58;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+
+
+article {
+  float: left;
+  padding: 20px;
+  width: 100%;
+  background-color: #f1f1f1;
+  height: 1000px; /* only for demonstration, should be removed */
+}
+
+
+
+nav {
+  float: left;
+  width: 100%;
+  height: 100px; /* only for demonstration, should be removed */
+  background: #BBD6E6;
+  padding: 20px;
+}
+
+
+nav2 {
+  float: left;
+  width: 50%;
+  text-align: right;
+  height: 600px; /* only for demonstration, should be removed */
+  padding: 20px;
+}
+padding: 20px;
+}
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+
+
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+  position: absolute;
+  left: 600px;
+  top: 600px
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+  position: absolute;
+  left: 600px;
+  top: 670px
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+</style>
+
+<header>
+  <h2>Airline Staff Registeration</h2>
+  <div style="text-align: right;">
+      <a href="/" style="color:  #f1f1f1">HOME</a>
+      |
+      <a href="/stafflogin" style="color:  #f1f1f1">LOGIN</a>
+  </div>
+</header>
+
+<body>
+	<nav>
+        <h2 style="text-align: center; "> Register As: 
+    		<a href="/cusregister" style="color:gray " >Customer</a>
+    		|
+    		<a href="/agentregister"  style="color:gray ">Booking Agent</a>
+    		|
+    		<a href="/staffregister">Airline Staff</a>
+    	</h2>
+    	
+	</nav>
+	<hr>
+	<h2 style="text-align: center; ">Register Information:</h2>
+    <nav2>
+        <label style="font-size: 16pt; height:40px;">Username:</label> </br>
+        <label style="font-size: 16pt; height:40px;">Password:</label> </br>
+        <label style="font-size: 16pt; height:40px;">First Name:</label> </br>
+        <label style="font-size: 16pt; height:40px;">Last Name:</label> </br>
+        <label style="font-size: 16pt; height:40px;">Date of Birth:</label> </br>
+        <label style="font-size: 16pt; height:40px;">Airline Name:</label> </br>
+    </nav2>
+
+
+	<form action="/staffregisterAuth" method="POST" style="text-align: left;">
+    	<br>
+		<input type="text" name = "username" placeholder="username" maxlength="50" style="font-size: 16pt; height:25px;"  required/> </br>
+		<input type="password" name = "password" placeholder="password" maxlength="50"  style="font-size: 16pt; height:25px;" 
+				pattern="^[a-zA-Z0-9]{6,}$" required/>
+		<label style="color: gray;"> >= 6 characters; No special characters</label> </br>
+		<input type="text" name = "first_name" placeholder="first_name" maxlength="50" style="font-size: 16pt; height:25px;" required/></br>
+		<input type="text" name = "last_name" placeholder="last_name" maxlength="50" style="font-size: 16pt; height:25px;" required/></br>
+		<input type="date" name = "date_of_birth" placeholder="date_of_birth" style="font-size: 16pt; height:25px;" required/> </br>
+		<input type="text" name = "airline_name" placeholder="airline_name" maxlength="50" style="font-size: 16pt; height:25px;" required/></br>
+		</br>
+		<button type="submit" class="button button1" style="width:250px"> Register as Staff</button>
+		
+		{% if error %}
+		<p style= "position: absolute;left: 600px; top: 730px"><strong>Error:</strong> {{error}}</p>
+		{% endif %}
+	</form>
+	</br>
+	<a href="/stafflogin">
+   		<button class="button button2" style="width:250px">Go back to Login Page</button>
+   	</a>
+</body>
+
+</html>

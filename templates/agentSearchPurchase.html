@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Airline Agent Tickets</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif; 
+}
+
+/* Style the header */
+header {
+  background-color: #123F58;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+
+
+article {
+  float: left;
+  padding: 20px;
+  width: 30%;
+  height: 600px;
+  background-color: #E3EDF3;
+}
+
+
+
+nav {
+  float: left;
+  width: 70%;
+  padding: 20px;
+  height: 600px;
+  text-align: center;
+  background-color: #F9F9F9;
+}
+
+
+nav2 {
+  float: left;
+  width: 50%;
+  text-align: right;
+  height: 600px; /* only for demonstration, should be removed */
+  padding: 20px;
+}
+padding: 20px;
+}
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+
+
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+  width: 250px
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+  width: 250px
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.button3 {
+  background-color: white; 
+  color:  #123F58; 
+  font-weight:bold;
+  font-size: 10pt;
+  width: 24%;
+}
+
+.button3:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+</style>
+
+<header>
+  <h2>Welcome to Search & Buy Tickets, {{emailName}}!</h2>
+  <div style="text-align: right">
+      <a href="/" style="color:  #f1f1f1">Public Home</a>
+      |
+      <a href="/logout" style="color:  #f1f1f1">Logout</a>
+  </div>
+</header>
+
+<body style="text-align: center">
+    <div>
+		<a href="/agenthome">
+       		<button class="button button3">Agent Home</button>
+       	</a>
+		<a href="/agentSearchPurchase">
+       		<button class="button button3">Search & Purchase Tickets</button>
+       	</a>
+		<a href="/agentCommission">
+       		<button class="button button3">View My Commission</button>
+       	</a>
+       	<a href="/agentTopCustomers">
+          		<button class="button button3">Top Customers</button>
+          	</a>
+    </div>
+
+	<h2>Search & Purchase Flights</h2>
+	<!-- Page content -->
+	<nav>
+
+		<div style="text-align: center;">
+			<h3>Search for Flight of the Airline You Works for</h3>
+			<form action="/agentSearchFlight" method="POST">
+				<label>Departure City:</label>
+				<input type="text" name = "departure_city" placeholder="departure_city"/> </br>
+				<label>Departure Airport:</label>
+				<input type="text" name = "departure_airport" placeholder="departure_airport" /></br>
+				<label>Departure Date:</label>
+				<input type="date" name = "departure_date"/></br>
+				<label >Arrival City:</label>
+				<input type="text" name = "arrival_city" placeholder="arrival_city" /> </br>
+				<label>Arrival Airport:</label>
+				<input type="text" name = "arrival_airport" placeholder="arrival_airport" /></br>
+				<label>Arrival Date:</label>
+				<input type="date" name = "arrival_date"/></br>
+				<br>
+				<button type="submit" class="button button2"">Search</button>
+				{% if error1 %}
+				<p class="text-danger"><strong>No Result:</strong> {{error1}}</p>
+				{% endif %}
+			</form>
+
+			{% if upcoming_flights %}
+			</br>
+			<table style="margin: auto;" border="1" width="950px">
+				<thead>
+					<th>Airline Name</th>
+					<th>Flight Num</th>
+					<th>Airplane ID</th>
+					<th>Departure City&Airport</th>
+					<th>Departure Time</th>
+					<th>Arrival City&Airport</th>
+					<th>Arrival Time</th>
+					<th>Status</th>
+					<th>Price</th>
+					<th>Remaining Tickets</th>
+				</thead>
+
+				<tbody>
+				{% for line in upcoming_flights %}
+					<tr>
+						<td>{{line[0]}}</td>
+						<td>{{line[2]}}</td>
+						<td>{{line[1]}}</td>
+						<td>{{line[3]}} {{line[4]}}</td>
+						<td>{{line[7]}}</td>  
+						<td>{{line[5]}} {{line[6]}}</td>
+						<td>{{line[8]}}</td> 
+						<td>{{line[9]}}</td>
+						<td>{{line[10]}}</td>
+						<td>{{line[11]}}</td>
+
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			{% endif %}
+    </nav>
+    <article>
+			<h3>Purchase Tickets</h3>
+			<p>{{data}}</p>
+			<form action="/agentBuyTickets" method="POST">
+				<label for="airline_name">Airline Name:</label>
+				<select name="airline_name" required>
+					<option value="" disabled>--please search first--</option>
+					{% if upcoming_flights%}
+					{% for line in upcoming_flights %}
+					<option value="{{line[0]}}">{{line[0]}}</option>
+					{% endfor %}
+					{% endif %}
+				</select></br>
+				<br>
+				<label for="flight_num">Flight Number:</label>
+				<select name="flight_num" required>
+					<option value="" disabled>--please search first--</option>
+					{% if upcoming_flights%}
+					{% for line in upcoming_flights %}
+					<option value="{{line[2]}}">{{line[2]}}</option>
+					{% endfor %}
+					{% endif %}
+				</select></br>
+                <br>
+				<label>Customer Email: </label>
+				<input type="email" name = "customer_email" placeholder="customer_email" maxlength="50" required/></br>
+				<br>
+				<button type="submit" class="button button1">Buy</button>
+				{% if error2 %}
+				<p>{{error2}}</p>
+				{% endif %}
+			  </form>
+
+			  {% if message %}
+			  <p>{{message}}</p>
+			  {% endif %}
+		</div>
+	</article>
+
+</body>
+</html>

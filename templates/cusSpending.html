@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Airline Customer Spending</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif; 
+}
+
+/* Style the header */
+header {
+  background-color: #123F58;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+
+
+article {
+  float: left;
+  padding: 20px;
+  width: 50%;
+  height: 200px;
+  background-color: #E3EDF3;
+}
+
+
+
+nav {
+  float: left;
+  width: 50%;
+  padding: 20px;
+  text-align: center;
+  height: 200px;
+  background-color: #F9F9F9;
+}
+
+
+nav2 {
+  float: left;
+  width: 50%;
+  text-align: right;
+  height: 600px; /* only for demonstration, should be removed */
+  padding: 20px;
+}
+padding: 20px;
+}
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+
+
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+  width: 250px
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+  width: 250px
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.button3 {
+  background-color: white; 
+  color:  #123F58; 
+  font-weight:bold;
+  font-size: 10pt;
+  width: 32%;
+}
+
+.button3:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+
+
+
+</style>
+
+<header>
+  <h2>Welcome to Track Your Spending, {{emailName}}!</h2>
+  <div style="text-align: right">
+      <a href="/" style="color:  #f1f1f1">Public Home</a>
+      |
+      <a href="/logout" style="color:  #f1f1f1">Logout</a>
+  </div>
+</header>
+
+
+<body style="text-align: center;">
+    
+    <div>
+		<a href="/cushome">
+       		<button class="button button3">Customer Home</button>
+       	</a>
+		<a href="/cusSearchPurchase">
+       		<button class="button button3">Search & Purchase Tickets</button>
+       	</a>
+		<a href="/cusSpending">
+       		<button class="button button3">Track My spending</button>
+       	</a>
+    </div>  
+
+	<!-- Page content -->
+	<nav>
+    	<h2>
+            Total Spending:
+            {% if total_spending_data %}
+            <td>{{total_spending_data}}</td>
+            {% else %}
+            <td>0</td>
+            {% endif %}
+        </h2>
+        <div style="text-align: center;">
+            <h3>
+                <form action="/cusSpending" method="POST">
+                    <label for="duration">Data collected from: </label>
+                    <select name="duration" required>
+                        {% if duration == "7" %}
+                        <option value="7" selected="selected">last week</option>
+                        {% else %}
+                        <option value="7">last week</option>
+                        {% endif %}
+                        
+                        {% if duration == "30" %}
+                        <option value="30" selected="selected">last month</option>
+                        {% else %}
+                        <option value="30">last month</option>
+                        {% endif %}
+
+                        {% if duration == "91" %}
+                        <option value="91" selected="selected">last quarter</option>
+                        {% else %}
+                        <option value="91">last quarter</option>
+                        {% endif %}
+
+                        {% if duration == "365" %}
+                        <option value="365" selected="selected">last year</option>
+                        {% else %}
+                        <option value="365">last year</option>
+                        {% endif %}
+
+                        {% if duration == "1825" %}
+                        <option value="1825" selected="selected">last 5 years</option>
+                        {% else %}
+                        <option value="1825">last 5 years</option>
+                        {% endif %}
+
+                        {% if duration == "36500" %}
+                        <option value="36500" selected="selected">all</option>
+                        {% else %}
+                        <option value="36500">all</option>
+                        {% endif %}
+                    </select></br>
+                    <button type="submit" class="button button2">Submit</button>
+                </form>
+            </h3>
+            
+     </nav>
+       
+     <article>    
+            <h2>Month-wise Spending</h2>
+            <h3>
+                <form action="/cusSpending" method="POST">
+                    <label for="period">Data collected from: </label>
+                    <select name="period" required>
+                        {% if period == "3" %}
+                        <option value="3" selected="selected">last quarter</option>
+                        {% else %}
+                        <option value="3">last quarter</option>
+                        {% endif %}
+                        
+                        {% if period == "6" %}
+                        <option value="6" selected="selected">last 6 months</option>
+                        {% else %}
+                        <option value="6">last 6 months</option>
+                        {% endif %}
+
+                        {% if period == "12" %}
+                        <option value="12" selected="selected">last year</option>
+                        {% else %}
+                        <option value="12">last year</option>
+                        {% endif %}
+
+                        {% if period == "24" %}
+                        <option value="24" selected="selected">last 2 years</option>
+                        {% else %}
+                        <option value="24">last 2 years</option>
+                        {% endif %}
+
+                        {% if period == "60" %}
+                        <option value="60" selected="selected">last 5 years</option>
+                        {% else %}
+                        <option value="60">last 5 years</option>
+                        {% endif %}
+
+                        {% if period == "100" %}
+                        <option value="100" selected="selected">all</option>
+                        {% else %}
+                        <option value="100">all</option>
+                        {% endif %}
+                    </select></br>
+                    <button type="submit" class="button button2">Submit</button>
+                </form>
+            </h3>
+    </article>
+    <div style="text-align: center;">
+            {% if total_spending_data %}
+         
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                <script type="text/javascript">
+                    // Load the Visualization API and the corechart package.
+                    google.charts.load('current', {'packages':['corechart']});
+                    
+                    // Set a callback to run when the Google Visualization API is loaded.
+                    google.charts.setOnLoadCallback(drawChart);
+                    
+                    // Callback that creates and populates a data table,
+                    // instantiates the pie chart, passes in the data and
+                    // draws it.
+                    function drawChart() {
+
+                      // Create the data table.
+                      var data = google.visualization.arrayToDataTable([
+                          {% for key, value in data.items() %}
+                              {% if value is string %}
+                                  ['{{ key }}', '{{ value }}'],
+                              {% else %}
+                                  ['{{ key }}', {{ value }}],
+                              {% endif %}
+                          {% endfor %}]);
+                                        
+                      // Set chart options
+                      var options = {title:'Month-wise Spending'};
+                      
+                      // Instantiate and draw our chart, passing in some options.
+                      var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+                      chart.draw(data, options);
+                      }
+                 </script>     
+                 <body>
+                  <!--Div that will hold the pie chart-->
+                     <div id="chart_div" style="width: 1300px;position: absolute; left:50px; top:550px;"></div>
+                 </body> 
+            {% else %}
+                <p style="position: absolute; left:950px; top:500px;">No Spending during this time range</p>       
+            {% endif %}
+    </div>   
+    
+
+ 
+</body>
+</html>

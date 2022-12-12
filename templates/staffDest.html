@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Airline Staff Top Destinations</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif; 
+}
+
+/* Style the header */
+header {
+  background-color: #123F58;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+
+
+article {
+  float: left;
+  padding: 20px;
+  width: 50%;
+  height: 600px;
+  background-color: #F9F9F9;
+  height: 600px;
+}
+
+
+
+nav {
+  float: left;
+  width: 50%;
+  padding: 20px;
+  background-color: #EEF1F3;
+  text-align: center;
+  height: 600px;
+}
+
+
+nav2 {
+  float: left;
+  width: 50%;
+  text-align: right;
+  height: 600px; /* only for demonstration, should be removed */
+  padding: 20px;
+}
+padding: 20px;
+}
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+
+
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+  width: 200px;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+  width: 200px;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.button3 {
+  background-color: white; 
+  color:  #123F58; 
+  font-weight:bold;
+  font-size: 10pt;
+  width: 11.5%;
+}
+
+.button3:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+</style>
+
+<header>
+  <h2>Welcome to Top Destinations Page, {{username}}!</h2>
+  <div style="text-align: right">
+      <a href="/" style="color:  #f1f1f1">Public Home</a>
+      |
+      <a href="/logout" style="color:  #f1f1f1">Logout</a>
+  </div>
+</header>
+
+
+<body style="text-align: center;">
+    <div style="text-align: center;">
+		<a href="/staffhome">
+       		<button class="button button3">Staff Home</button>
+       	</a>
+		<a href="/staffflight">
+       		<button class="button button3">Change Flights</button>
+       	</a>
+		<a href="/staffaddinfo">
+       		<button class="button button3">Add New Items</button>
+       	</a>
+		<a href="/staffagent">
+       		<button class="button button3">Agents</button>
+       	</a>
+		<a href="/staffcus">
+       		<button class="button button3">Customers</button>
+       	</a>
+		<a href="/staffDest">
+       		<button class="button button3">Top Destination</button>
+       	</a>
+        <a href="/staffReve">
+       		<button class="button button3">Revenue</button>
+       	</a>
+        <a href="/staffTickets">
+       		<button class="button button3">Tickets Report</button>
+       	</a>
+	</div>
+
+    <h2>Top Destinations</h2>
+    <nav>
+            <h3 style="text-align: center;">Top 3 Most Popular Destination Last 3 Months</h3>
+            <table style="margin: auto;" border="1", width="500px">
+                <th>city</th>
+                <th>number of ticket</th>
+            {% for line in month %}		
+                <tr>
+                    <td>{{line[0]}}</td>
+                    <td>{{line[1]}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+    </nav>
+    <article>
+            <h3 style="text-align: center;">Top 3 Most Popular Destination Last Year</h3>
+            <table style="margin: auto;" border="1", width="500px">
+                <th>city</th>
+                <th>number of ticket</th>
+
+            {% for line in year %}		
+                <tr>
+                    <td>{{line[0]}}</td>
+                    <td>{{line[1]}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+    </article> 
+
+</body>
+</html>

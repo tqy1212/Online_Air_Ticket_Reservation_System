@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Booking Agent Registeration</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif; 
+}
+
+/* Style the header */
+header {
+  background-color: #123F58;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+
+
+article {
+  float: left;
+  padding: 20px;
+  width: 100%;
+  background-color: #f1f1f1;
+  height: 1000px; /* only for demonstration, should be removed */
+}
+
+
+
+nav {
+  float: left;
+  width: 100%;
+  height: 100px; /* only for demonstration, should be removed */
+  background: #BBD6E6;
+  padding: 20px;
+}
+
+
+nav2 {
+  float: left;
+  width: 50%;
+  text-align: right;
+  height: 600px; /* only for demonstration, should be removed */
+  padding: 20px;
+}
+padding: 20px;
+}
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+
+
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+  position: absolute;
+  left: 600px;
+  top: 550px
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+  position: absolute;
+  left: 600px;
+  top: 620px
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+</style>
+
+<header>
+  <h2>Booking Agent Registeration</h2>
+  <div style="text-align: right">
+      <a href="/" style="color:  #f1f1f1">HOME</a>
+      |
+      <a href="/agentlogin" style="color:  #f1f1f1">LOGIN</a>
+  </div>
+</header>
+
+<body>
+	<nav>
+        <h2 style="text-align: center; "> Register As: 
+    		<a href="/cusregister" style="color:gray " >Customer</a>
+    		|
+    		<a href="/agentregister" >Booking Agent</a>
+    		|
+    		<a href="/staffregister" style="color:gray" >Airline Staff</a>
+    	</h2>
+    	
+	</nav>
+	<hr>
+	<h2 style="text-align: center; ">Register Information: </h2>
+    <nav2>
+        <label style="font-size: 16pt; height:40px;">Email Adress:</label> </br>
+        <label style="font-size: 16pt; height:40px;">Password:</label> </br>
+        <label style="font-size: 16pt; height:40px;">Booking Agent ID:</label> </br>
+
+    </nav2>
+    
+	<form action="/agentregisterAuth" method="POST" style="text-align: left;">
+    	<br>
+		<input type="email" name = "email" placeholder="email" maxlength="50"  style="font-size: 16pt; height:25px;"  required/> </br>
+		<input type="password" name = "password" placeholder="password" maxlength="50"  style="font-size: 16pt; height:25px;"  pattern="^[a-zA-Z0-9]{6,}$" required/>
+		<label style="color: gray;"> >= 6 characters; No special characters</label> </br>
+		<input type="text" name="booking_agent_id" placeholder="booking_agent_id" maxlength="10" style="font-size: 16pt; height:25px;" required/></br>
+		</br>
+		<button type="submit" class="button button1" style="width:250px"> Register as Agent</button>
+		</br>
+		{% if error %}
+		<p style= "position: absolute;left: 600px; top: 680px"><strong>Error:</strong> {{error}}</p>
+		{% endif %}
+		
+	</form>
+	</br>
+	<a href="/agentlogin">
+   		<button class="button button2" style="width:250px">Go back to Login Page</button>
+   	</a>
+
+
+</body>
+</html>

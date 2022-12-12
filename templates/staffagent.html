@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Airline Staff Manage Agent</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif; 
+}
+
+/* Style the header */
+header {
+  background-color: #123F58;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+
+
+article {
+  float: left;
+  padding: 20px;
+  text-align: center;
+  width: 35%;
+  background-color: #EEF1F3;
+  height: 600px; /* only for demonstration, should be removed */
+}
+
+
+
+nav {
+  float: left;
+  width: 35%;
+  background-color: #E3EDF3;
+  height: 600px; /* only for demonstration, should be removed */
+  text-align: center;
+  padding: 20px;
+}
+
+nav2 {
+  float: left;
+  width: 30%;
+  text-align: center;
+  background-color: #F9F9F9;
+  height: 600px; /* only for demonstration, should be removed */
+  padding: 20px;
+}
+padding: 20px;
+}
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+
+
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  width: 200px;
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  width: 200px;
+  border: 2px solid #008CBA;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.button3 {
+  background-color: white; 
+  color:  #123F58; 
+  font-weight:bold;
+  font-size: 10pt;
+  width: 11.5%;
+}
+
+.button3:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+</style>
+
+<header>
+  <h2>Welcome to Manage Agents Page, {{username}}!</h2>
+  <div style="text-align: right">
+      <a href="/" style="color:  #f1f1f1">Public Home</a>
+      |
+      <a href="/logout" style="color:  #f1f1f1">Logout</a>
+  </div>
+</header>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body style="text-align: center;">
+    <div style="text-align: center;">
+		<a href="/staffhome">
+       		<button class="button button3">Staff Home</button>
+       	</a>
+		<a href="/staffflight">
+       		<button class="button button3">Change Flights</button>
+       	</a>
+		<a href="/staffaddinfo">
+       		<button class="button button3">Add New Items</button>
+       	</a>
+		<a href="/staffagent">
+       		<button class="button button3">Agents</button>
+       	</a>
+		<a href="/staffcus">
+       		<button class="button button3">Customers</button>
+       	</a>
+		<a href="/staffDest">
+       		<button class="button button3">Top Destination</button>
+       	</a>
+        <a href="/staffReve">
+       		<button class="button button3">Revenue</button>
+       	</a>
+        <a href="/staffTickets">
+       		<button class="button button3">Tickets Report</button>
+       	</a>
+       	
+
+<body>
+
+
+    {% if adata %}
+        </br>
+        <h2>View Booking Agents for <strong style="color: #123F58;">{{adata[0][1]}}</strong></h2>
+    {% else %}
+        <h2>View Booking Agents</h2>
+    {% endif %}
+        
+        <nav>
+            <h4 style="text-align: center;">Top 5 Agents for Amount of Commission Last Year</h4>
+            <table style="margin: auto;" border="1", width="400px">
+                <th>email</th>
+                <th>booking agent id</th>
+                <th>amount of commission</th>
+
+            {% for line in commission %}		
+                <tr>
+                    <td>{{line[0]}}</td>
+                    <td>{{line[1]}}</td>	
+                    <td>{{line[2]}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+
+            <h4 style="text-align: center;">Top 5 Agents for Number of Tickets Last Month</h4>
+            <table style="margin: auto;" border="1", width="400px">
+                <th>email</th>
+                <th>booking agent id</th>
+                <th>number of tickets sales</th>
+
+            {% for line in month %}		
+                <tr>
+                    <td>{{line[0]}}</td>
+                    <td>{{line[1]}}</td>
+                    <td>{{line[2]}}</td>	
+                </tr>
+            {% endfor %}
+            </table>
+
+            <h4 style="text-align: center;">Top 5 Agents for Number of Tickets Last Year</h4>
+            <table style="margin: auto;" border="1", width="400px">
+                <th>email</th>
+                <th>booking agent id</th>
+                <th>number of tickets sales</th>
+
+            {% for line in year %}		
+                <tr>
+                    <td>{{line[0]}}</td>
+                    <td>{{line[1]}}</td>	
+                    <td>{{line[2]}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </nav>
+        <article>
+            <h4 style="text-align: center;">All Agents Existing</h4>
+            <table style="margin: auto;" border="1", width="400px">
+                <th>email</th>
+                <th>booking agent id</th>
+
+            {% for line in posts %}		
+                <tr>
+                    <td>{{line[0]}}</td>
+                    <td>{{line[1]}}</td>	
+                </tr>
+            {% endfor %}
+            </table>
+        </article>
+        <nav2>
+        <h4 style="text-align: center;">Add New Agents</h4>
+        <form action="/add_agent" method="POST">
+            <label for="agent_email">Booking Agent Email:</label>
+            <select name="agent_email" required>
+                <option value="" disabled>--please search first--</option>
+                {% for line in posts %}
+            	<option value="{{line[0]}}">{{line[0]}}</option> 
+            	{% endfor %}
+            </select>
+            <hr>
+            <button type="submit" class="button button1">Add New Agents</button>
+            {% if error %}
+                <p>{{error}}</p>
+            {% endif %}
+            
+            
+        </nav2>
+
+<!-- <a href="/staffhome">Go back</a> -->
+</body>
+</html>

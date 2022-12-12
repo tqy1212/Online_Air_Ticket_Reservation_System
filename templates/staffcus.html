@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Airline Staff Manage Customer</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif; 
+}
+
+/* Style the header */
+header {
+  background-color: #123F58;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+
+
+article {
+  float: left;
+  padding: 20px;
+  width: 50%;
+  height: 600px;
+  background-color: #F9F9F9;
+  height: 600px;
+}
+
+
+
+nav {
+  float: left;
+  width: 50%;
+  padding: 20px;
+  background-color: #EEF1F3;
+  text-align: center;
+  height: 600px;
+}
+
+
+nav2 {
+  float: left;
+  width: 50%;
+  text-align: right;
+  height: 600px; /* only for demonstration, should be removed */
+  padding: 20px;
+}
+padding: 20px;
+}
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+
+
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+  width: 200px;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+  width: 200px;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.button3 {
+  background-color: white; 
+  color:  #123F58; 
+  font-weight:bold;
+  font-size: 10pt;
+  width: 11.5%;
+}
+
+.button3:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+</style>
+
+<header>
+  <h2>Welcome to Manage Customers Page, {{username}}!</h2>
+  <div style="text-align: right">
+      <a href="/" style="color:  #f1f1f1">Public Home</a>
+      |
+      <a href="/logout" style="color:  #f1f1f1">Logout</a>
+  </div>
+</header>
+
+
+<body style="text-align: center;">
+    <div style="text-align: center;">
+		<a href="/staffhome">
+       		<button class="button button3">Staff Home</button>
+       	</a>
+		<a href="/staffflight">
+       		<button class="button button3">Change Flights</button>
+       	</a>
+		<a href="/staffaddinfo">
+       		<button class="button button3">Add New Items</button>
+       	</a>
+		<a href="/staffagent">
+       		<button class="button button3">Agents</button>
+       	</a>
+		<a href="/staffcus">
+       		<button class="button button3">Customers</button>
+       	</a>
+		<a href="/staffDest">
+       		<button class="button button3">Top Destination</button>
+       	</a>
+        <a href="/staffReve">
+       		<button class="button button3">Revenue</button>
+       	</a>
+        <a href="/staffTickets">
+       		<button class="button button3">Tickets Report</button>
+       	</a>
+	</div>
+    {% if cdata %}
+        <h2>View Customers for <strong style="color: #123F58;">{{cdata[0][1]}}</strong></h2>
+    {% else %}
+        <h2>View Customers</h2>
+    {% endif %}
+
+    <nav>
+        <h3>Most Frequent Customer Last Year</h3>
+        <table style="margin: auto;" border="1", width="400px">
+            <th>Customer Email</th>
+            <th>Customer Name</th>
+            <th>Number of Tickets Bought</th>
+
+        {% for line in frequent %}		
+            <tr>
+                <td>{{line[0]}}</td>
+                <td>{{line[1]}}</td>	
+                <td>{{line[2]}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </nav>
+    <article>
+           
+        <h3>Flights Bought by Customer</h3>
+        <form action="/staffcusflight" method="POST">
+            <label>Customer email:</label>
+            <input type="email" name = "customer_email" placeholder="customer_email" maxlength="50" required/></br>
+            </br>
+            <button type="submit" class="button button2">Search</button>
+            
+            {% if error %}
+            <p class="text-danger"><strong>Sorry:</strong> {{error}}</p>
+            {% endif %}
+        </form>
+
+        {% if cusflight %}
+        <table style="margin: auto;" border="1", width="600px">
+            <thead>
+                <th>Airplane id</th>
+                <th>Flight num</th>
+                <th>Departure Airport</th>
+                <th>Arrival Airport</th>
+                <th>Departure Time</th>
+                <th>Arrival Time</th>
+                <th>Status</th>
+            </thead>
+
+            <tbody>
+            {% for line in cusflight %}
+                <tr>
+                    <td>{{line[0]}}</td>
+                    <td>{{line[1]}}</td>
+                    <td>{{line[2]}}</td>
+                    <td>{{line[3]}}</td>
+                    <td>{{line[4]}}</td>
+                    <td>{{line[5]}}</td>
+                    <td>{{line[6]}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+            
+    </article>
+            
+
+</body>
+</html>

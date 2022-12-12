@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Airline Staff Revenue</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif; 
+}
+
+/* Style the header */
+header {
+  background-color: #123F58;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+
+
+article {
+  float: left;
+  padding: 20px;
+  width: 50%;
+  height: 100px;
+  background-color: #F9F9F9;
+  height: 100px;
+}
+
+
+
+nav {
+  float: left;
+  width: 50%;
+  padding: 20px;
+  background-color: #EEF1F3;
+  text-align: center;
+  height: 100px;
+}
+
+
+nav2 {
+  float: left;
+  width: 50%;
+  text-align: right;
+  height: 600px; /* only for demonstration, should be removed */
+  padding: 20px;
+}
+padding: 20px;
+}
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+
+
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+  width: 200px;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+  width: 200px;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.button3 {
+  background-color: white; 
+  color:  #123F58; 
+  font-weight:bold;
+  font-size: 10pt;
+  width: 11.5%;
+}
+
+.button3:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+</style>
+
+<header>
+  <h2>Welcome to View Revenue Page, {{username}}!</h2>
+  <div style="text-align: right">
+      <a href="/" style="color:  #f1f1f1">Public Home</a>
+      |
+      <a href="/logout" style="color:  #f1f1f1">Logout</a>
+  </div>
+</header>
+
+
+<body style="text-align: center;">
+    <div style="text-align: center;">
+		<a href="/staffhome">
+       		<button class="button button3">Staff Home</button>
+       	</a>
+		<a href="/staffflight">
+       		<button class="button button3">Change Flights</button>
+       	</a>
+		<a href="/staffaddinfo">
+       		<button class="button button3">Add New Items</button>
+       	</a>
+		<a href="/staffagent">
+       		<button class="button button3">Agents</button>
+       	</a>
+		<a href="/staffcus">
+       		<button class="button button3">Customers</button>
+       	</a>
+		<a href="/staffDest">
+       		<button class="button button3">Top Destination</button>
+       	</a>
+        <a href="/staffReve">
+       		<button class="button button3">Revenue</button>
+       	</a>
+        <a href="/staffTickets">
+       		<button class="button button3">Tickets Report</button>
+       	</a>
+	</div>
+
+
+
+<body>
+    {% if posts %}
+        <h2>View Revenue Earned for <strong style="color: #123F58;">{{posts[0][1]}}</strong></h2>
+    {% else %}
+        <h2>View Revenue Earned</h2>
+    {% endif %}
+        <nav>
+            <h3>Total Revenue Earned Last Month: {{msum}}</h2>
+        </nav>
+        <article>
+            <h3>Total Revenue Earned Last Year: {{ysum}}</h2>
+        </article>
+    {% if mdata %}
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            // Load the Visualization API and the corechart package.
+            google.charts.load('current', {'packages':['corechart']});
+            
+            // Set a callback to run when the Google Visualization API is loaded.
+            google.charts.setOnLoadCallback(drawChart);
+            
+            // Callback that creates and populates a data table,
+            // instantiates the pie chart, passes in the data and
+            // draws it.
+            function drawChart() {
+
+              // Create the data table.
+              var data = google.visualization.arrayToDataTable([
+                  {% for key, value in mdata.items() %}
+                      {% if value is string %}
+                          ['{{ key }}', '{{ value }}'],
+                      {% else %}
+                          ['{{ key }}', {{ value }}],
+                      {% endif %}
+                  {% endfor %}]);
+
+                                
+              // Set chart options
+              var options = {title:'Revenue Earned Last Month'};
+              
+              // Instantiate and draw our chart, passing in some options.
+              var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+              chart.draw(data, options);
+              }
+         </script>     
+         <body>
+          <!--Div that will hold the pie chart-->
+             <div id="chart_div" style="position: absolute; left:150px; top:500px; width: 500px; hight: 600px" ></div>
+         </body>        
+    {% endif %}
+
+    {% if ydata %}
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            // Load the Visualization API and the corechart package.
+            google.charts.load('current', {'packages':['corechart']});
+            
+            // Set a callback to run when the Google Visualization API is loaded.
+            google.charts.setOnLoadCallback(drawChart);
+            
+            // Callback that creates and populates a data table,
+            // instantiates the pie chart, passes in the data and
+            // draws it.
+            function drawChart() {
+
+              // Create the data table.
+              var data = google.visualization.arrayToDataTable([
+                  {% for key, value in ydata.items() %}
+                      {% if value is string %}
+                          ['{{ key }}', '{{ value }}'],
+                      {% else %}
+                          ['{{ key }}', {{ value }}],
+                      {% endif %}
+                  {% endfor %}]);
+
+                                
+              // Set chart options
+              var options = {title:'Revenue Earned Last Year'};
+              
+              // Instantiate and draw our chart, passing in some options.
+              var chart = new google.visualization.PieChart(document.getElementById('chart_div2'));
+              chart.draw(data, options);
+              }
+         </script>     
+         <body>
+          <!--Div that will hold the pie chart-->
+             <div id="chart_div2" style="position: absolute; left:850px; top:500px; width: 500px; hight: 600px" ></div>
+         </body>        
+    {% endif %}
+    
+
+<!-- <a href="/staffhome">Go back</a> -->
+</body>
+</html>

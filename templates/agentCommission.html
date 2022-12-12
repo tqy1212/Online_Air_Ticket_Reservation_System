@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Airline Agent Commission</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif; 
+}
+
+/* Style the header */
+header {
+  background-color: #123F58;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+
+
+article {
+  float: left;
+  padding: 20px;
+  width: 30%;
+  height: 600px;
+  background-color: #E3EDF3;
+}
+
+
+
+nav {
+  float: left;
+  width: 70%;
+  padding: 20px;
+  text-align: center;
+}
+
+
+nav2 {
+  float: left;
+  width: 50%;
+  text-align: right;
+  height: 600px; /* only for demonstration, should be removed */
+  padding: 20px;
+}
+padding: 20px;
+}
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+
+
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+  position: absolute;
+  left: 600px;
+  top: 600px
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+  width: 200px;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.button3 {
+  background-color: white; 
+  color:  #123F58; 
+  font-weight:bold;
+  font-size: 10pt;
+  width: 24%;
+}
+
+.button3:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+</style>
+
+<header>
+  <h2>Welcome to Agent Commission, {{emailName}}!</h2>
+  <div style="text-align: right">
+      <a href="/" style="color:  #f1f1f1">Public Home</a>
+      |
+      <a href="/logout" style="color:  #f1f1f1">Logout</a>
+  </div>
+</header>
+
+
+<body style="text-align: center">
+    <div>
+		<a href="/agenthome">
+       		<button class="button button3">Agent Home</button>
+       	</a>
+		<a href="/agentSearchPurchase">
+       		<button class="button button3">Search & Purchase Tickets</button>
+       	</a>
+		<a href="/agentCommission">
+       		<button class="button button3">View My Commission</button>
+       	</a>
+       	<a href="/agentTopCustomers">
+          		<button class="button button3">Top Customers</button>
+          	</a>
+    </div>
+
+	
+	<!-- Page content -->
+	<div class="main">
+        <h2>My Commission</h2>
+        <div style="text-align: center;">
+            <h3>
+                <form action="/agentCommission" method="POST">
+                    <label for="duration">Data Collected From: </label>
+                    <select name="duration"  required>
+                        {% if duration == "7" %}
+                        <option value="7" selected="selected">last week</option>
+                        {% else %}
+                        <option value="7">last week</option>
+                        {% endif %}
+                        
+                        {% if duration == "30" %}
+                        <option value="30" selected="selected">last month</option>
+                        {% else %}
+                        <option value="30">last month</option>
+                        {% endif %}
+
+                        {% if duration == "91" %}
+                        <option value="91" selected="selected">last quarter</option>
+                        {% else %}
+                        <option value="91">last quarter</option>
+                        {% endif %}
+
+                        {% if duration == "365" %}
+                        <option value="365" selected="selected">last year</option>
+                        {% else %}
+                        <option value="365">last year</option>
+                        {% endif %}
+
+                        {% if duration == "1825" %}
+                        <option value="1825" selected="selected">last 5 years</option>
+                        {% else %}
+                        <option value="1825">last 5 years</option>
+                        {% endif %}
+
+                        {% if duration == "36500" %}
+                        <option value="36500" selected="selected">all</option>
+                        {% else %}
+                        <option value="36500">all</option>
+                        {% endif %}
+                    </select></br>
+                    <br>
+                    <button type="submit" class="button button2">search</button>
+                </form>
+            </h3>
+
+            <table style="margin: auto;" border="1", width="1300px">
+                <thead>
+                    <th>Total Commission</th>
+                    <th>Avg Commission Per Ticket</th>
+                    <th>Num of Tickets Sold</th>
+                </thead>
+    
+                <tbody>
+                    <tr>
+                        {% if total_com %}
+                        <td>{{total_com}}</td>
+                        {% else %}
+                        <td>0</td>
+                        {% endif %}
+                        {% if avg_com %}
+                        <td>{{avg_com}}</td>
+                        {% else %}
+                        <td>0</td>
+                        {% endif %}
+                        <td>{{count_ticket}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Airline Staff Add New Items</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif; 
+}
+
+/* Style the header */
+header {
+  background-color: #123F58;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+
+
+article {
+  float: left;
+  padding: 20px;
+  text-align: center;
+  width: 36%;
+  background-color: #EEF1F3;
+  height: 800px; /* only for demonstration, should be removed */
+}
+
+
+
+nav {
+  float: left;
+  width: 32%;
+  background-color: #E3EDF3;
+  height: 800px; /* only for demonstration, should be removed */
+  text-align: center;
+  padding: 20px;
+}
+
+nav2 {
+  float: left;
+  width: 32%;
+  text-align: center;
+  background-color: #F9F9F9;
+  height: 800px; /* only for demonstration, should be removed */
+  padding: 20px;
+}
+padding: 20px;
+}
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+
+
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  width: 200px;
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  width: 200px;
+  border: 2px solid #008CBA;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.button3 {
+  background-color: white; 
+  color:  #123F58; 
+  font-weight:bold;
+  font-size: 10pt;
+  width: 11.5%;
+}
+
+.button3:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+</style>
+
+<header>
+  <h2>Welcome to Add New Items Page, {{username}}!</h2>
+  <div style="text-align: right">
+      <a href="/" style="color:  #f1f1f1">Public Home</a>
+      |
+      <a href="/logout" style="color:  #f1f1f1">Logout</a>
+  </div>
+</header>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body style="text-align: center;">
+    <div style="text-align: center;">
+		<a href="/staffhome">
+       		<button class="button button3">Staff Home</button>
+       	</a>
+		<a href="/staffflight">
+       		<button class="button button3">Change Flights</button>
+       	</a>
+		<a href="/staffaddinfo">
+       		<button class="button button3">Add New Items</button>
+       	</a>
+		<a href="/staffagent">
+       		<button class="button button3">Agents</button>
+       	</a>
+		<a href="/staffcus">
+       		<button class="button button3">Customers</button>
+       	</a>
+		<a href="/staffDest">
+       		<button class="button button3">Top Destination</button>
+       	</a>
+        <a href="/staffReve">
+       		<button class="button button3">Revenue</button>
+       	</a>
+        <a href="/staffTickets">
+       		<button class="button button3">Tickets Report</button>
+       	</a>
+	</div>
+    {% if posts %}
+        </br>
+        <h2>Create Flight & Airplane & Airport for <strong style="color: #123F58;">{{posts[0][1]}}</strong></h2>
+    {% else %}
+        <h2>Create Flight & Airplane & Airport</h2>
+    {% endif %}
+        <nav>
+            <h3>Add New Flight</h3>
+            <form action="/create_flight" method="POST">
+                <!-- <label>Airline Name:</label> -->
+                <!-- <input type="text" name = "airline_name" placeholder="airline_name" maxlength="50" required/> </br> -->
+                <!-- <input type="text" name = "flight_num" placeholder="flight_num" required/> </br> -->
+                <label>Flight Number:</label>
+                <input type="text" name = "flight_num" placeholder="flight_num" /></br>
+                <label>Departure Airport:</label>
+                <input type="text" name = "departure_airport" placeholder="departure_airport" maxlength="50" required/> </br>
+                <label>Departure Time:</label>
+                <input type="date" name = "departure_date"/>
+                <input type="time" name = "departure_time" placeholder="departure_time" required/> </br>
+                <label>Arrival Airport:</label>
+                <input type="text" name = "arrival_airport" placeholder="arrival_airport" maxlength="50" required/> </br>
+                <label>Arrival Time:</label>
+                <input type="date" name = "arrival_date"/>
+                <input type="time" name = "arrival_time" placeholder="arrival_time" required/> </br>
+                <!-- <input type="text" name = "price" placeholder="price" required/> </br> -->
+
+
+                <label>Price:</label>
+                <input name="price" 
+                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                        type = "number" placeholder="price" 
+                        maxlength = "10" 
+                        required/></br>
+                <label>Number of Ticket:</label>
+                <input name="number" 
+                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                        type = "number" placeholder="number_of_tickets" 
+                        maxlength = "10" 
+                        required/></br>
+                <!-- <input type="text" name = "status" placeholder="status" required/> </br> -->
+                <label for="status">Status:</label>
+                <select name="status" required>
+                    <option value="upcoming">upcoming</option>
+                    <option value="delayed">delayed</option>
+                    <option value="in-progress">in-progress</option>
+                </select></br>
+                <!-- <input type="text" name = "airplane_id" placeholder="airplane_id" required/> </br> -->
+                <label>Airplane ID:</label>
+                <!-- <input name="airplane_id" 
+                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                    type = "number" placeholder="airplane_id" 
+                    maxlength = "9" 
+                    required/></br>     -->
+                <select name="airplane_id" required>
+                    {% if airplane%}
+                    {% for line in airplane %}
+                    <option value="{{line[0]}}">{{line[0]}}</option>
+                    {% endfor %}
+                    {% endif %}
+                </select>
+                </br>
+                <button type="submit" class="button button1">Add New Flight</button>
+                {% if error1 %}
+                    <p><strong>Error:</strong> {{error1}}</p>
+                {% endif %}
+                {% if message1 %}
+                    <p>{{message1}}</p>
+                {% endif %}
+            </form>
+            
+        </nav>
+        <article>
+            <h3>Add New Airplane</h3>
+            <form action="/add_airplane" method="POST">
+                <!-- <label>Airline Name:</label> -->
+                <!-- <input type="text" name = "airline_name" placeholder="airline_name" maxlength="50" required/> </br> -->
+                <!-- <input type="text" name = "airplane_id" placeholder="airplane_id" required/> </br> -->
+                <label>Airplane ID:</label>
+                <input type="text" name = "airplane_id" placeholder="airplane_id" /></br>
+
+                <!-- <input type="text" name = "seats" placeholder="seats" required/> </br> -->
+                <label>Seats:</label>
+                <input name="seats" 
+                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" 
+                    type = "number" placeholder="seats" 
+                    maxlength = "9" 
+                    required/></br>  
+                </br>
+                <button type="submit" class="button button1">Add New Airplane</button>
+                {% if error2 %}
+                    <p><strong>Error:</strong> {{error2}}</p>
+                {% endif %}
+                {% if message2 %}
+                    <p>{{message2}}</p>
+                {% endif %}
+            </form>
+            {% if airplane %}
+            <h3>Existing Airplanes</h3>
+            <table style="margin: auto;" border="1", width="400px">
+                <thead>
+                    <!-- <th>airline_name</th> -->
+                    <th>airplane id</th>
+                    <th>seats</th>
+
+                </thead>
+    
+                <tbody>
+                {% for line in airplane %}
+                    <tr>
+                        <td>{{line[0]}}</td>
+                        <td>{{line[1]}}</td>
+                        <!-- <td>{{line[2]}}</td> -->
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            
+            {% else %}
+            <h5>No Airplane</h5>
+    
+            {% endif %}
+        </article>
+        <nav2>
+            <h3>Add New Airport</h3>
+            <form action="/add_airport" method="POST">
+                <label>Airport Name:</label>
+                <input type="text" name = "airport_name" placeholder="airport_name" maxlength="50" required/> </br>
+                <label>Airport City:</label>
+                <input type="text" name = "airport_city" placeholder="airport_city" maxlength="50" required/> </br>
+                </br>
+                <button type="submit" class="button button1">Add New Airport</button>
+                {% if error3 %}
+                    <p><strong>Error:</strong> {{error3}}</p>
+                {% endif %}
+                {% if message3 %}
+                    <p>{{message3}}</p>
+                {% endif %}
+
+            </form>
+        </nav2>    
+
+<!-- <a href="/staffhome">Go back</a> -->
+</body>
+</html>
